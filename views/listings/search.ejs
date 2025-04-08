@@ -1,0 +1,150 @@
+<% layout("/layouts/boilerplate") -%>
+<style>
+    body {
+        font-family: "Plus Jakarta Sans", sans-serif !important;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    .container {
+        flex: 1;
+    }
+
+    .navbar {
+        height: 5rem;
+    }
+
+    .fa-compass {
+        color: #fe424d;
+        font-size: 2rem;
+    }
+
+    .nav-link {
+        color: #222222 !important;
+    }
+
+    .f-info-links a {
+        text-decoration: none;
+        color: #222222;
+    }
+
+    .f-info-links, .f-info-socials, .f-info-brands {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .f-info-socials i {
+        margin-right: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .f-info-links a:hover {
+        text-decoration: underline;
+        color: #222222;
+    }
+
+    .f-info {
+        text-align: center;
+        height: 8rem;
+        display: flex;
+        background-color: #ebebed;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center; /* Adjusted from space-evenly to center */
+    }
+    /* cards */
+
+    .listing-card {
+        border: none !important;
+        margin-bottom: 2rem;
+    }
+
+    .card-img-top {
+        border-radius: 1rem !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .card-body {
+        padding: 0 !important;
+    }
+
+    .card-text {
+        font-weight: 400 !important;
+    }
+
+    .listing-link {
+        text-decoration: none;
+    }
+
+    .card-img-overlay {
+        opacity: 0;
+    }
+
+    .card-img-overlay:hover {
+        opacity: 0.2;
+        background-color: white;
+    }
+
+    .add-btn {
+        background-color: #fe424d !important;
+        border: none !important;
+    }
+
+    .show-img {
+        height: 30vh;
+    }
+
+    .btns {
+        display: flex;
+    }
+
+    .show-card {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #map { 
+        height: 400px;
+        width: 80vh; 
+    }
+</style>
+
+<div class="mt-2 col-8 offset-2">
+    <h2>Search Results :</h2>
+</div>
+
+<div class="row">
+    <div class="col-8 offset-2 mt-3">
+        <div class="search-results">
+            <% if (listings.length > 0) { %>
+                <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+                    <% for (let listing of listings) { %>
+                        <div class="col mb-4">
+                            <a href="/listings/<%= listing._id %>" class="listing-link">
+                                <div class="card listing-card">
+                                    <img src="<%= listing.image.url %>" alt="<%= listing.title %>" class="card-img-top" style="height: 15rem;">
+                                    <div class="card-img-overlay"></div>
+                                    <div class="card-body mt-2">
+                                        <p class="card-text mt-1">
+                                            <b><%= listing.title %><br></b>
+                                            &#8377;<%= listing.price.toLocaleString("en-IN") %> / night
+                                        </p>
+                                        <p class="card-text">
+                                            <i class="fa-solid fa-location-dot"></i> <%= listing.location %>, <%= listing.country %>
+                                        </p>
+                                        <p class="card-text"><%= listing.description %></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <p class="text-center">No listings found.</p>
+            <% } %>
+        </div>
+    </div>
+</div>
